@@ -18,9 +18,21 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 else{
-    $n = "SELECT id and name FROM users";   
+    $sql ="SELECT id from users";
+    $result = mysqli_query($conn, $sql);  
+    //conert database result into array
+   $rows = [];
+   while($row = mysqli_fetch_array($result)){
+       array_push($rows,$row);
+   }
+   //convert php_array into javascript
+    $json = json_encode($rows);  
 }
 ?>
+    <script>
+        var vertices = <?= $json?>;
+        console.log(vertices);
+    </script>
 
 </body>
 </html>
