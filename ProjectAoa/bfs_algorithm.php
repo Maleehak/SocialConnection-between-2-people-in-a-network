@@ -40,10 +40,10 @@ else{
                 this.adjacencyList = new Map(); 
             } 
           
-            addVertices(vertex) { 
-            this.adjacencyList.set(vertex.id, new Set()); 
+            addVertices(vertex) {
+            this.adjacencyList.set(vertex.id, new Set());
+
                 } 
-        
             addEdges(vertex1, vertex2) { 
             var user1=vertex1.id;
             var user2=vertex2.id; 
@@ -61,8 +61,12 @@ else{
                     concate += userId + " ";
                  }
                  console.log(i + " -> " + concate);
-            } 
-        }
+            }
+            }
+            getSuccessors(vertex){
+                return this.adjacencyList.get(vertex);
+            }
+          
         }
 
     //Queue to be used in BFS
@@ -75,7 +79,7 @@ else{
             }
         dequeue(){
             if(!this.isEmpty()){
-                this.queue.shift();//remove from start of array
+                return this.queue.shift();//remove from start of array
             }  
         }
         isEmpty(){
@@ -88,15 +92,14 @@ else{
              console.log(i);
             }
         }
-
+        
         //functions
         function randomNumber(min,max){
             return parseInt(Math.random()*(max-min)+min);
         }
 
-        function createRandomEdge(){
+        function createRandomEdge(g,length){
             var g = new Graph(length); 
-            var nodesList=[];
             var neighbor;
             //add vertices
             for (var i = 0; i < length; i++) { 
@@ -117,10 +120,52 @@ else{
                     }    
                     }   
                 }
+                //debugger;
                 g.printGraph();
-            }  
+               return g;
+            } 
+
+        //BFS
+        function BFS(g,s,e){
+            console.log("START NODE is "+ s);
+            console.log("END NODE is "+ e);
+           var queue = new Queue();
+           var explored = [];
+           var path = [];
+           explored.push(s);
+            queue.enqueue(s);
+           while(!queue.isEmpty()){
+               var parentNode = queue.dequeue();
+               path.push(parentNode);
+               if(parentNode==e){
+                   break;
+               }
+               
+               var allSuccessors = g.adjacencyList;
+               //console.log(allSuccessors);
+               var temp=parentNode.toString();
+               //console.log(temp);
+               var successors=allSuccessors.get(temp);
+               //console.log(successors);
+                for (var successor of successors){
+                 if(!explored[successor]){
+                    explored.push(successor);
+                       queue.enqueue(successor);
+                    }
+               }
+            }
+            return path;
+        }
             //for console output
-            createRandomEdge();
+            //debugger;
+            var g = new Graph(length);
+            var e=createRandomEdge(g,length);
+            var randomNumber1 = randomNumber(1,length-1);
+            var randomNumber2 = randomNumber(1,length-1);
+            //debugger;
+            var path = BFS(e,randomNumber1,randomNumber2);
+            var path = path.toString();
+            console.log("PATH  "+ "("+ path + ")");
         </script>
     </body>
 </html>
