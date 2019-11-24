@@ -1,0 +1,76 @@
+.container-fluid{
+    height: 100%;
+}
+#customColor{
+    background-color: #475770;
+    
+}
+#textColor {
+    color:#ff3366;
+}
+#textColor:hover{
+    color:white;
+}
+body{
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: new time 'Times New Roman'
+}
+
+h2{
+    font-size: 45px;
+    color:#475770;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.form-outer{
+    background-color:black;
+    margin: 3px;;
+    background:white;
+
+    
+}
+
+p{
+    margin-top: 20px;
+    font-size: 19px;
+    color: white;
+}
+.btn-default{
+    margin-top: 5px;
+    margin-left: 50px;
+    width: 220px;
+    font-size: 18px;
+    position: relative;
+    background:#475770;
+    
+
+}
+#button{
+    margin-left: 50px;
+    margin-right: 80px;
+
+}
+#form-textColor{
+    color:black;
+}
+.input-container {
+   display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.icon {
+  padding: 10px;
+  
+  color:#475770;
+  min-width: 50px;
+  text-align: center;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  outline: none;
+}
