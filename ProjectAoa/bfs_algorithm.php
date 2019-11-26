@@ -120,40 +120,61 @@ else{
                     }    
                     }   
                 }
-                //debugger;
                 g.printGraph();
                return g;
             } 
 
         //BFS
         function BFS(g,s,e){
+            var key=true;
+            var mapPath=new Map();
+            var end = e.toString();
+            var start = s.toString();
             console.log("START NODE is "+ s);
             console.log("END NODE is "+ e);
+            for(i=0;i<vertices.length;i++){
+                //var endNode=e.toString();
+                if(end==vertices[i].id){
+                    key=true;
+                    break;
+                }
+                else{
+                    key=false;
+                }
+            }
+            if(key==false){
+                console.log("user not found");
+            }
            var queue = new Queue();
            var explored = [];
-           var path = [];
-           explored.push(s);
-            queue.enqueue(s);
+           //var startNode=s.toString();
+           explored.push(start);
+           queue.enqueue(start);
            while(!queue.isEmpty()){
                var parentNode = queue.dequeue();
-               path.push(parentNode);
-               if(parentNode==e){
+               if(parentNode==end){
                    break;
                }
-               
                var allSuccessors = g.adjacencyList;
-               //console.log(allSuccessors);
                var temp=parentNode.toString();
-               //console.log(temp);
                var successors=allSuccessors.get(temp);
-               //console.log(successors);
                 for (var successor of successors){
-                 if(!explored[successor]){
+                  if(explored.includes(successor)==false){
+                     mapPath.set(successor,parentNode);
+                     console.log(mapPath);
                     explored.push(successor);
-                       queue.enqueue(successor);
+                    queue.enqueue(successor);
                     }
                }
             }
+            var path=[];
+            path.push(end);
+           while(end!=start){
+            var next=mapPath.get(end);
+            path.push(next);
+            end=next;
+           }
+            path=path.reverse();
             return path;
         }
             //for console output
