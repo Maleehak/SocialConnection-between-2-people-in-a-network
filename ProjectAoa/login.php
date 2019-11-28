@@ -9,7 +9,7 @@
             <link href="images/titleLogo.jpg" rel="icon" type="image/png">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link href="style/style.css" rel="stylesheet" type="text/css" >
+        <link href="style/style.css?version=51" rel="stylesheet" type="text/css" >
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
@@ -74,10 +74,6 @@
                              <input type="text"  name="username" placeholder="Enter User Name" class="input-field" required >
                            
                         </div>
-                         <div class="input-container">
-                                <i class="fa fa-user icon"></i>
-                            <input type="text"  name="fullName" placeholder="Enter User ID" class="input-field" required>
-                         </div>
 
                         <div class="input-container">
                             <i class="fa fa-key icon"></i>
@@ -89,7 +85,7 @@
                         <h6 class="h6 mr-3 mt-3">Not Registered yet? <br><a href="registration.html" style="color: #ff3366" >Register Now</a></h6>
                         </div>
                         <div class="col-md-6">
-                        <button type="submit" class="btn btn-default"  name="submit"><span style="color:#ff3366;"><h5>Login</span></h5></button>
+                        <button type="submit" class="btn btn-default"  name="submit"><span style="color:white"><h5>Login</span></h5></button>
                         </div>
                         </div>
                     </form>
