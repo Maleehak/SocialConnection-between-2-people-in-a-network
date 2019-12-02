@@ -96,6 +96,7 @@ else{
         background('white');
         createGraph();
     }
+    var mapVertices=new Map();
     function createGraph(){
         //took data from PHP  
         var vertices = <?= $json?>;
@@ -176,7 +177,7 @@ else{
         function createRandomEdge(g,length){
             var g = new Graph(length); 
             var neighbor;
-            var mapVertices=new Map();
+           // var mapVertices=new Map();
 
             //add vertices
             //debugger;
@@ -208,10 +209,13 @@ else{
                         
                        line(x1,y1,x2,y2);
                     }    
-                    }   
+                    }  
                 }
                 g.printGraph();
+            
                return g;
+               
+
             } 
 
         //BFS
@@ -257,6 +261,7 @@ else{
                     }
                }
             }
+
             var path=[];
             path.push(end);
            while(end!=start){
@@ -274,8 +279,32 @@ else{
             var randomNumber1 = randomNumber(1,length-1);
             var randomNumber2 = randomNumber(1,length-1);
             //debugger;
-          var path = BFS(e,randomNumber1,randomNumber2);
-        var path = path.toString();
+            var path = BFS(e,randomNumber1,randomNumber2);
+            console.log(mapVertices);
+            var pathLength=path.length;
+            console.log(pathLength);
+            var pathValue;
+            //nodes
+            for(var i=0; i<pathLength; i++){
+                stroke('red');
+                noFill();
+                ellipse(mapVertices.get(path[i])[0], mapVertices.get(path[i])[1], 50, 50);
+            }
+            //for edges
+            for(var i=1; i<pathLength; i++){
+                var x1=mapVertices.get(path[i-1])[0];
+                var y1=mapVertices.get(path[i-1])[1];
+                var x2=mapVertices.get(path[i])[0];
+                var y2=mapVertices.get(path[i])[1];
+               // console.log(x1);
+               // console.log(y1);
+               // console.log(x2);
+               // console.log(y2);
+                line(x1,y1,x2,y2);
+
+            }
+
+            var path = path.toString();
            console.log("PATH  "+ "("+ path + ")");
     }
      //session destroy
