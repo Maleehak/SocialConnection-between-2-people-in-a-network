@@ -82,7 +82,7 @@
                         </div>
                         <div class="row" id="button">
                         <div class="col-md-6">
-                        <h6 class="h6 mr-3 mt-3">Not Registered yet? <br><a href="registration.html" style="color: #ff3366" >Register Now</a></h6>
+                        <h6 class="h6 mr-3 mt-3">Not Registered yet? <br><a href="signup.php" style="color: #ff3366" >Register Now</a></h6>
                         </div>
                         <div class="col-md-6">
                         <button type="submit" class="btn btn-default"  name="submit"><span style="color:white"><h5>Login</span></h5></button>

@@ -24,7 +24,7 @@
                     $servername = "localhost";
                     $username = "root";
                     $password = "";
-                    $dbname="network";
+                    $dbname="socialnetwork";
                         
                     // Create connection
                     $conn = mysqli_connect($servername, $username, $password,$dbname);
@@ -33,14 +33,14 @@
                         die("Connection failed: " . mysqli_connect_error());
                     }
                     else{
-                        $sql_u ="SELECT id FROM users WHERE username= '$n'";
+                        $sql_u ="SELECT id FROM users WHERE name= '$n'";
                         $res_u = mysqli_query($conn,$sql_u);
                         if(mysqli_num_rows($res_u) > 0){
                             echo "Already Registered";
                         }
                     else{
                         if($p==$cp){
-                            $sql="INSERT INTO users(username,password) VALUES('$n','$p')";
+                            $sql="INSERT INTO users(name,password) VALUES('$n','$p')";
                             if(mysqli_query($conn,$sql)){
                                 echo "Successfully Registered";
                             }
@@ -74,7 +74,7 @@
                         <div class="collapse navbar-collapse" id="navData">
                             <ul class="navbar-nav ml-auto" >
                                     <li class="nav-item">
-                                         <a href="login.html" class="nav-link" id="textColor">Login</a>
+                                         <a href="login.php" class="nav-link" id="textColor">Login</a>
                                     </li>
                             </ul>
                         </div>  
