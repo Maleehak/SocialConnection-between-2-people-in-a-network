@@ -70,6 +70,18 @@ else{
                         Connection Between Two People in a Network
                        </h5> 
                     </div>
+                     <!--Button to collapse items in it-->
+                     <button class="navbar-toggler" data-toggle="collapse" data-target="#navData">
+                            <spam class="navbar-toggler-icon" ></spam>
+                        </button>
+                        <!--Content in the navbar-->
+                        <div class="collapse navbar-collapse" id="navData">
+                            <ul class="navbar-nav ml-auto" >
+                                    <li class="nav-item">
+                                         <a href="login.php" class="nav-link" id="textColor">Log out</a>
+                                    </li>
+                            </ul>
+                        </div>  
                 </nav>
                 <div  id="userOption">
                 <div class="container" >
