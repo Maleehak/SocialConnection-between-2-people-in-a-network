@@ -13,10 +13,10 @@
         <script src="p5.js"></script>
     <?php 
     if(isset($_SESSION['name'])){
-        $n=$_SESSION['name'];
+        $user1=$_SESSION['name'];
     }
     if(isset($_SESSION['id'])){
-        $id=$_SESSION['id'];
+        $user1Id=$_SESSION['id'];
     }
 
 //$data=array();
@@ -40,8 +40,21 @@ else{
        array_push($rows,$row);
    }
    //converted PHP array to JS array
-    $json = json_encode($rows);
-    //$data=$json;
+    $json = json_encode($rows); 
+    //user2
+    if(isset($_POST["submit"])){
+        $user2 = $_POST["username2"];
+        $user2Id = mysqli_query($conn,"SELECT id FROM users WHERE name='$user2'")->fetch_object()->id;
+        if($user2Id){
+            
+       }
+       else{
+        echo "User not found";  
+       }
+    }
+   
+   mysqli_close($conn);
+
 }?> 
 
 </head>
@@ -67,7 +80,7 @@ else{
                     <div class="col-3">
                     <div class="input-container">
                                 <i class="fa fa-user icon"></i>
-                             <input type="text"  name="username" placeholder="<?php echo $n?>" class="input-field"  disabled style="background-color:white" >
+                             <input type="text"  name="username" placeholder="<?php echo $user1?>" class="input-field"  disabled style="background-color:white" >
                            
                         </div>
                     </div>
@@ -87,10 +100,14 @@ else{
                 </div>
                 <div>
     <script >
-        var user1="<?php echo $n?>"; //for string
-        var user1Id=<?php echo $id?>;
+        var user1="<?php echo $user1?>"; //for string
+        var user1Id=<?php echo $user1Id?>;
+        var user2="<?php echo $user2?>"; //for string
+        var user2Id=<?php echo $user2Id?>;
         console.log(user1);
         console.log(user1Id);
+        console.log(user2);
+        console.log(user2Id);
         function setup(){
         createCanvas(windowWidth,windowHeight);
         background('white');
@@ -192,7 +209,7 @@ else{
             //add edges
             for (var i = 0; i <length; i++) { 
                 //how many edges for each vertex
-                var randomEdges=randomNumber(0,length-1);
+                var randomEdges=randomNumber(0,(length-1)/8);
                 console.log(randomEdges);
                 //which node to connect
                 for(var j=0; j<=randomEdges;j++){
@@ -226,19 +243,6 @@ else{
             var start = s.toString();
             console.log("START NODE is "+ s);
             console.log("END NODE is "+ e);
-            for(i=0;i<vertices.length;i++){
-                //var endNode=e.toString();
-                if(end==vertices[i].id){
-                    key=true;
-                    break;
-                }
-                else{
-                    key=false;
-                }
-            }
-            if(key==false){
-                console.log("user not found");
-            }
            var queue = new Queue();
            var explored = [];
            //var startNode=s.toString();
@@ -272,6 +276,30 @@ else{
             path=path.reverse();
             return path;
         }
+        function showPath(g,path){
+            console.log(mapVertices);
+            var pathLength=path.length;
+            console.log(pathLength);
+            var pathValue;
+            for(var i=0; i<pathLength; i++){
+                stroke('red');
+                noFill();
+                ellipse(mapVertices.get(path[i])[0], mapVertices.get(path[i])[1], 50, 50);
+            }
+            for(var i=1; i<pathLength; i++){
+                var x1=mapVertices.get(path[i-1])[0];
+                var y1=mapVertices.get(path[i-1])[1];
+                var x2=mapVertices.get(path[i])[0];
+                var y2=mapVertices.get(path[i])[1];
+                console.log(x1);
+                console.log(y1);
+                console.log(x2);
+                console.log(y2);
+                line(x1,y1,x2,y2);
+            }
+            var path = path.toString();
+           console.log("PATH  "+ "("+ path + ")");
+        }
             //for console output
             //debugger;
             var g = new Graph(length);
@@ -279,33 +307,8 @@ else{
             var randomNumber1 = randomNumber(1,length-1);
             var randomNumber2 = randomNumber(1,length-1);
             //debugger;
-            var path = BFS(e,randomNumber1,randomNumber2);
-            console.log(mapVertices);
-            var pathLength=path.length;
-            console.log(pathLength);
-            var pathValue;
-            //nodes
-            for(var i=0; i<pathLength; i++){
-                stroke('red');
-                noFill();
-                ellipse(mapVertices.get(path[i])[0], mapVertices.get(path[i])[1], 50, 50);
-            }
-            //for edges
-            for(var i=1; i<pathLength; i++){
-                var x1=mapVertices.get(path[i-1])[0];
-                var y1=mapVertices.get(path[i-1])[1];
-                var x2=mapVertices.get(path[i])[0];
-                var y2=mapVertices.get(path[i])[1];
-               // console.log(x1);
-               // console.log(y1);
-               // console.log(x2);
-               // console.log(y2);
-                line(x1,y1,x2,y2);
-
-            }
-
-            var path = path.toString();
-           console.log("PATH  "+ "("+ path + ")");
+            var path = BFS(e,user1Id,user2Id);
+            showPath(e,path);
     }
      //session destroy
         </script>
