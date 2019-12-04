@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -13,6 +12,7 @@
     </head>
     <body>
             <?php
+            error_reporting(E_ALL ^ E_NOTICE);
                 //taking input from http
                 if(isset($_POST["submit"])) {
                     $n = $_POST["username"];
@@ -36,13 +36,13 @@
                         $sql_u ="SELECT id FROM users WHERE name= '$n'";
                         $res_u = mysqli_query($conn,$sql_u);
                         if(mysqli_num_rows($res_u) > 0){
-                            echo "Already Registered";
+                            echo "<script type='text/JavaScript'>alert('Already Registered!!')</script>" ; 
                         }
                     else{
                         if($p==$cp){
                             $sql="INSERT INTO users(name,password) VALUES('$n','$p')";
                             if(mysqli_query($conn,$sql)){
-                                echo "Successfully Registered";
+                                echo "<script type='text/JavaScript'>alert('Successfully Registered!!')</script>";
                             }
                             else{
                                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
@@ -50,7 +50,7 @@
                             mysqli_close($conn);
                         }
                         else{
-                            echo "Password and Confirm password do not match";
+                            echo "<script type='text/JavaScript'>alert('Password and Confirm Password do not match!!')</script>";
                         } 
                         }
                     }
@@ -111,7 +111,7 @@
                                 <div class="col-md-6">
                                 </div>
                                 <div class="col-md-6">
-                                <button type="submit" class="btn btn-default" name="submit"><span style="color:#ff3366;"><h5>Submit</span></h5></button>
+                                <button type="submit" class="btn btn-default" name="submit"><span style="color:#ff3366;"><h5>Register</span></h5></button>
                                 </form>
                                 </div>
                                 </div>

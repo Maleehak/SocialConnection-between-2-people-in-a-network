@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php session_start(); 
+//to avoid error message from displaying on screen
+error_reporting(E_ALL ^ E_NOTICE);?>
 <html>
 <head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -49,7 +51,7 @@ else{
             
        }
        else{
-        echo "User not found";  
+        echo "<script type='text/JavaScript'>alert('User you want to connect is not found')</script>" ;  
        }
     }
    
@@ -109,7 +111,7 @@ else{
         console.log(user2);
         console.log(user2Id);
         function setup(){
-        createCanvas(windowWidth,windowHeight);
+        createCanvas(windowWidth,2000);
         background('white');
         createGraph();
     }
@@ -201,19 +203,23 @@ else{
             for (var i = 0; i < length; i++) { 
                 //debugger;
                 var x=randomNumber(50,windowWidth-50);
-                var y=randomNumber(50,windowHeight-50);
+                var y=randomNumber(50,2000-50);
                 g.addVertices(vertices[i],x,y); 
                 mapVertices.set(vertices[i].id,[x,y]);
                 console.log(mapVertices);
             }
             //add edges
+            
             for (var i = 0; i <length; i++) { 
                 //how many edges for each vertex
-                var randomEdges=randomNumber(0,(length-1)/8);
+                var randomEdges=randomNumber(0,length-1)/8;
+                //var randomEdges=randomNumber(0,length-1)
                 console.log(randomEdges);
                 //which node to connect
+                var randomIndex=0;
                 for(var j=0; j<=randomEdges;j++){
-                    var randomIndex=randomNumber(0,length-1);
+                    //var randomIndex=randomNumber(0,length-1);
+                    var randomIndex=abs(randomNumber(0,length-1)-randomIndex);
                     neighbor=vertices[randomIndex]
                     if(randomIndex!=i){
                         var node1=vertices[i];
@@ -308,7 +314,14 @@ else{
             var randomNumber2 = randomNumber(1,length-1);
             //debugger;
             var path = BFS(e,user1Id,user2Id);
-            showPath(e,path);
+            setTimeout(function(){
+                var str="The path between ";
+                var message=str.concat(user1," and ",user2," is ");
+                console.log(message);
+                alert(message);
+                showPath(e,path)}
+                ,1000);
+            //showPath(e,path);
     }
      //session destroy
         </script>

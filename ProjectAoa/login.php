@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php session_start();
+error_reporting(E_ALL ^ E_NOTICE); ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -38,10 +39,10 @@
                   $_SESSION['name'] = $n;
                   $_SESSION['id'] = $key;
                   echo "Login Successfully";
-                  echo "<a href='bfs_algorithm.php'>Show Profile</a>";        
+                  header('location:bfs_algorithm.php');      
              }
               else{
-                 echo "User not found";
+                echo "<script type='text/JavaScript'>alert('You have not registered yet')</script>" ; 
              }
              mysqli_close($conn);
         }
